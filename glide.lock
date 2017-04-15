@@ -1,0 +1,38 @@
+hash: 5bbed95ebc95d8db49b6c928d8706344078bd4ceb5cfad911ad9d3a5961f84a6
+updated: 2017-04-15T23:55:07.243597273+02:00
+imports:
+- name: github.com/dgrijalva/jwt-go
+  version: 2268707a8f0843315e2004ee4f1d021dc08baedf
+- name: github.com/jackc/pgx
+  version: 136ced3636f40f49b7588917071be4f603d395c4
+- name: github.com/labstack/echo
+  version: c3069d42c14d073a07fe6458fda46d65579492db
+  subpackages:
+  - middleware
+- name: github.com/labstack/gommon
+  version: 9298d710c664bcd21c454120f63a00fb7d484458
+  subpackages:
+  - bytes
+  - color
+  - log
+  - random
+- name: github.com/mattn/go-colorable
+  version: ded68f7a9561c023e790de24279db7ebf473ea80
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/valyala/bytebufferpool
+  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
+- name: github.com/valyala/fasttemplate
+  version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
+- name: golang.org/x/crypto
+  version: cbc3d0884eac986df6e78a039b8792e869bff863
+  subpackages:
+  - acme
+  - acme/autocert
+  - bcrypt
+  - blowfish
+- name: golang.org/x/sys
+  version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
+  subpackages:
+  - unix
+testImports: []

@@ -1,0 +1,10 @@
+package: reviewer
+import:
+- package: github.com/dgrijalva/jwt-go
+- package: github.com/jackc/pgx
+- package: github.com/labstack/echo
+  subpackages:
+  - middleware
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
