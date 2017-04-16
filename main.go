@@ -19,7 +19,7 @@ func main() {
 
 	router := echo.New()
 
-	pool := repo.NewReviewerPool(username, database)
+	pool := repo.NewReviewerPool(username, database, 5)
 	users := repo.NewUsersRepo(pool)
 	reviews := repo.NewReviewsRepo(pool)
 
@@ -44,7 +44,7 @@ func main() {
 
 	protected := router.Group("/api")
 	protected.Use(middleware.JWT([]byte("supersecret")))
-	protected.Use(userInfo.UserInfo(users))
+	protected.Use(userInfo.UserInfo)
 	protected.GET("/reviews", reviewHandler.GetAll)
 	protected.POST("/reviews", reviewHandler.Create)
 

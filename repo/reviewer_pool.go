@@ -5,14 +5,14 @@ import (
 	"log"
 )
 
-func NewReviewerPool(username, database string) *pgx.ConnPool {
+func NewReviewerPool(username, database string, connections int) *pgx.ConnPool {
 	poolConfig := pgx.ConnPoolConfig{
 		ConnConfig: pgx.ConnConfig{
 			User:     username,
 			Password: "",
 			Database: database,
 		},
-		MaxConnections: 5,
+		MaxConnections: connections,
 	}
 	pool, err := pgx.NewConnPool(poolConfig)
 	if err != nil {

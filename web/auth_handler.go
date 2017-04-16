@@ -30,6 +30,8 @@ func (handler *AuthHandler) Auth(ctx echo.Context) error {
 	claims := token.Claims.(jwt.MapClaims)
 	claims["username"] = user.Username
 	claims["exp"] = time.Now().Add(1 * time.Hour).Unix()
+	claims["sub"] = user.Id
+	claims["email"] = user.Email
 
 	signed, err := token.SignedString([]byte("supersecret"))
 	if err != nil {
