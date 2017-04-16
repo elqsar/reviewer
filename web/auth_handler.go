@@ -29,11 +29,12 @@ func (handler *AuthHandler) Auth(ctx echo.Context) error {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["username"] = user.Username
-	claims["exp"] = time.Now().Add(24 * time.Hour).Unix()
+	claims["exp"] = time.Now().Add(1 * time.Hour).Unix()
 
 	signed, err := token.SignedString([]byte("supersecret"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
+
 	return ctx.JSON(http.StatusOK, map[string]string{"token": signed})
 }

@@ -2,7 +2,6 @@ package repo
 
 import (
 	"github.com/jackc/pgx"
-	"log"
 	"reviewer/entity"
 )
 
@@ -15,19 +14,7 @@ const (
 	GetByUsername = "select * from users where username=$1"
 )
 
-func NewUsersRepo() *UsersRepo {
-	poolConfig := pgx.ConnPoolConfig{
-		ConnConfig: pgx.ConnConfig{
-			User:     "musatov",
-			Password: "",
-			Database: "reviewer",
-		},
-		MaxConnections: 5,
-	}
-	pool, err := pgx.NewConnPool(poolConfig)
-	if err != nil {
-		log.Fatal("Unable to config connection pool")
-	}
+func NewUsersRepo(pool *pgx.ConnPool) *UsersRepo {
 	return &UsersRepo{
 		pool: pool,
 	}
@@ -38,28 +25,20 @@ func (repo *UsersRepo) Create(user *entity.User) error {
 	return err
 }
 
-func (repo *UsersRepo) GetByUsername(username string) (user *entity.User, err error) {
+func (repo *UsersRepo) GetByUsername(username string) (*entity.User, error) {
 	rows, err := repo.pool.Query(GetByUsername, username)
 	if err != nil {
 		return nil, err
 	}
-	var id int
-	var password string
-	var email string
+	var user entity.User
 	for rows.Next() {
-		if err := rows.Scan(&id, &username, &password, &email); err != nil {
+		if err := rows.Scan(&user.Id, &user.Username, &user.Password, &user.Email); err != nil {
 			return nil, err
 		}
 	}
 	if err := rows.Err(); err != nil {
 		return nil, err
 	}
-	result := &entity.User{
-		Id: id,
-		Username: username,
-		Password: password,
-		Email: email,
-	}
-	return result, nil
+	return &user, nil
 
 }
