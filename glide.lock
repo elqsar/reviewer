@@ -1,5 +1,5 @@
 hash: 5bbed95ebc95d8db49b6c928d8706344078bd4ceb5cfad911ad9d3a5961f84a6
-updated: 2017-04-15T23:55:07.243597273+02:00
+updated: 2017-04-17T13:07:27.741815354+02:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: 2268707a8f0843315e2004ee4f1d021dc08baedf
@@ -8,6 +8,8 @@ imports:
 - name: github.com/labstack/echo
   version: c3069d42c14d073a07fe6458fda46d65579492db
   subpackages:
+  - cookbook/twitter/handler
+  - cookbook/twitter/model
   - middleware
 - name: github.com/labstack/gommon
   version: 9298d710c664bcd21c454120f63a00fb7d484458
@@ -35,4 +37,11 @@ imports:
   version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
   subpackages:
   - unix
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 testImports: []

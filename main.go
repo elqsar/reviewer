@@ -1,16 +1,22 @@
 package main
 
 import (
+	"flag"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"log"
 	"net/http"
+	"os"
 	"reviewer/repo"
 	"reviewer/web"
 	userInfo "reviewer/web/middleware"
-	"flag"
 )
 
 func main() {
+	secret := os.Getenv("SECRET")
+	if secret == "" {
+		log.Fatal("SECRET was not provided")
+	}
 	var username string
 	var database string
 	flag.StringVar(&username, "username", "", "Database user username")
@@ -43,10 +49,11 @@ func main() {
 	router.POST("/auth", authHandler.Auth)
 
 	protected := router.Group("/api")
-	protected.Use(middleware.JWT([]byte("supersecret")))
+	protected.Use(middleware.JWT([]byte(secret)))
 	protected.Use(userInfo.UserInfo)
-	protected.GET("/reviews", reviewHandler.GetAll)
-	protected.POST("/reviews", reviewHandler.Create)
+	protected.GET("/reviews", reviewHandler.GetAllReviews)
+	protected.GET("/users/:id/reviews", reviewHandler.GetUsersReviews)
+	protected.POST("/users/:id/reviews", reviewHandler.Create)
 
 	router.Start(":3000")
 }
