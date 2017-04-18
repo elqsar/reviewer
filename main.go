@@ -61,5 +61,5 @@ func main() {
 	api.GET("/users/:id/reviews", reviewHandler.GetUsersReviews)
 	api.POST("/users/:id/reviews", reviewHandler.Create)
 
-	router.Start(":3000")
+	log.Fatalf("Server was unable to start: %s", router.Start(":3000"))
 }
