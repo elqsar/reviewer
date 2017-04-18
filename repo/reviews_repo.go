@@ -27,6 +27,11 @@ func (repo *ReviewsRepo) CreateReview(review *entity.Review) (id int, err error)
 	return
 }
 
+func (repo *ReviewsRepo) DeleteReview(id int) error {
+	_, err := repo.pool.Exec("delete from reviews where id = $1", id)
+	return err
+}
+
 func (repo *ReviewsRepo) GetReviews(user int) (reviews []*entity.Review, err error) {
 	rows, err := repo.pool.Query(QueryReviews, user)
 	if err != nil {

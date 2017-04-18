@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func NewReviewerPool(username, database string, connections int) *pgx.ConnPool {
+func NewPool(username, database string, connections int) *pgx.ConnPool {
 	poolConfig := pgx.ConnPoolConfig{
 		ConnConfig: pgx.ConnConfig{
 			User:     username,
