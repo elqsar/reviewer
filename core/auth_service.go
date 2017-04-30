@@ -1,12 +1,12 @@
 package core
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"os"
-	_ "os"
 	"reviewer/entity"
 	"strconv"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 func CreateToken(user *entity.User) (string, error) {
